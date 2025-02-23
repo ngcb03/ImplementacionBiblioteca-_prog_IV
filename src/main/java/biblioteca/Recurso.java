@@ -34,8 +34,7 @@ public abstract class Recurso {
 
     @Override
     public String toString() {
-        return "Recurso{" +
-                "nombre='" + nombre + '\'' +
+        return "nombre='" + nombre + '\'' +
                 ", fechaIngreso=" + fechaIngreso +
                 ", activo=" + activo +
                 '}';
