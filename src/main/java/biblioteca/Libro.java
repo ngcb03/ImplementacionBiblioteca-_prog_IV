@@ -37,7 +37,7 @@ public class Libro extends Recurso {
     public String toString() {
         return "Libro{" +
                 super.toString() +
-                "autor='" + autor + '\'' +
+                ", autor='" + autor + '\'' +
                 ", editorial='" + editorial + '\'' +
                 ", anio=" + anio +
                 '}';
