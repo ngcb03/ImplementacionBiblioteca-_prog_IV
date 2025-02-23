@@ -43,7 +43,7 @@ public class Computador extends Recurso {
     public String toString() {
         return "Computador{" +
                 super.toString() +
-                "marca='" + marca + '\'' +
+                ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", sistemaOperativo='" + sistemaOperativo + '\'' +
                 '}';
