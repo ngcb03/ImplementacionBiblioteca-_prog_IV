@@ -36,7 +36,7 @@ public class Computador extends Recurso {
 
     @Override
     public boolean coincideConCriterio(String criterio) {
-        return getNombre().contains(criterio) || marca.contains(criterio) || sistemaOperativo.contains(criterio);
+        return getNombre().contains(criterio) || marca.contains(criterio) || sistemaOperativo.contains(criterio) || tipoComputador.toString().toLowerCase().contains(criterio);
     }
 
     @Override
@@ -46,6 +46,8 @@ public class Computador extends Recurso {
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", sistemaOperativo='" + sistemaOperativo + '\'' +
+                ", tipoComputador='" + tipoComputador.toString() + '\'' +
                 '}';
     }
+    
 }
