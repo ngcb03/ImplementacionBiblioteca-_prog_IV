@@ -31,7 +31,7 @@ public class Periodico extends Recurso {
     public String toString() {
         return "Periodico{" +
                 super.toString() +
-                "fechaPublicacion=" + fechaPublicacion +
+                ", fechaPublicacion=" + fechaPublicacion +
                 ", editorial='" + editorial + '\'' +
                 '}';
     }
