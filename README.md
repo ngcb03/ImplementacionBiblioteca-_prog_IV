@@ -11,7 +11,7 @@ Este es un sistema de gestión de biblioteca desarrollado en **Java Maven**, que
 
 ## 🛠 Tecnologías Utilizadas
 
-- **Java 17+**
+- **Java 21+**
 - **Programación Orientada a Objetos (POO)**
 - **Colecciones y Streams API**
 
