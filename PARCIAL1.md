@@ -11,13 +11,15 @@
   ### R. El ejemplo práctico se puede ver en la línea 31 de clase ServicioBiblioteca, donde la inyección de dependencias se realiza mediante su constructor.
 
  ```java
-@Component
-public class ServicioBiblioteca {
-
+    // inyección de dependencias por constructor lineas 18-34
     private final Repositorio<Libro> libroRepositorio;
     private final Repositorio<Periodico> periodicoRepositorio;
     private final Repositorio<Computador> computadorRepositorio;
 
+    /*
+     * ejemplo práctico en código donde una clase sea inyectada 
+     * como dependencia mediante el constructor.
+    */
     @Autowired
     public ServicioBiblioteca(Repositorio<Libro> libroRepositorio,
                               Repositorio<Periodico> periodicoRepositorio,
@@ -26,7 +28,6 @@ public class ServicioBiblioteca {
         this.periodicoRepositorio = periodicoRepositorio;
         this.computadorRepositorio = computadorRepositorio;
     }
-}
 ```
 
 # Uso de Repositorios Genéricos en Java
