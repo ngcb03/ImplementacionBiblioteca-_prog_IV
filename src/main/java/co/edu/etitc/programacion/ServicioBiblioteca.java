@@ -17,8 +17,8 @@ public class ServicioBiblioteca {
 
     // inyección de dependencias por constructor lineas 18-34
     private final RecursoRepositorio<Libro> repositorioLibros;
-    private final RecursoRepositorio<Periodico> repositorioPeriodico;
-    private final RecursoRepositorio<Computador> repositorioComputador;
+    private final RecursoRepositorio<Periodico> repositorioPeriodicos;
+    private final RecursoRepositorio<Computador> repositorioComputadores;
 
     /*
      * ejemplo práctico en código donde una clase sea inyectada 
@@ -29,8 +29,8 @@ public class ServicioBiblioteca {
                               RecursoRepositorio<Periodico> periodicoRepositorio,
                               RecursoRepositorio<Computador> computadorRepositorio) {
         this.repositorioLibros = libroRepositorio;
-        this.repositorioPeriodico = periodicoRepositorio;
-        this.repositorioComputador = computadorRepositorio;
+        this.repositorioPeriodicos = periodicoRepositorio;
+        this.repositorioComputadores = computadorRepositorio;
     }
 
     // agregar un recurso desde el respositorio específico
@@ -38,9 +38,9 @@ public class ServicioBiblioteca {
         if (recurso instanceof Libro) {
             repositorioLibros.agregar((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            repositorioPeriodico.agregar((Periodico) recurso);
+            repositorioPeriodicos.agregar((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            repositorioComputador.agregar((Computador) recurso);
+            repositorioComputadores.agregar((Computador) recurso);
         } else {
             throw new IllegalArgumentException("Tipo de recurso no soportado: " + recurso.getClass().getName());
         }
@@ -51,9 +51,9 @@ public class ServicioBiblioteca {
         if (recurso instanceof Libro) {
             repositorioLibros.eliminar((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            repositorioPeriodico.eliminar((Periodico) recurso);
+            repositorioPeriodicos.eliminar((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            repositorioComputador.eliminar((Computador) recurso);
+            repositorioComputadores.eliminar((Computador) recurso);
         } else {
             throw new IllegalArgumentException("Tipo de recurso no soportado: " + recurso.getClass().getName());
         }
@@ -67,8 +67,8 @@ public class ServicioBiblioteca {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
         
         recursosBuscados.addAll(repositorioLibros.buscar(criterio));
-        recursosBuscados.addAll(repositorioPeriodico.buscar(criterio));
-        recursosBuscados.addAll(repositorioComputador.buscar(criterio));
+        recursosBuscados.addAll(repositorioPeriodicos.buscar(criterio));
+        recursosBuscados.addAll(repositorioComputadores.buscar(criterio));
         
         return recursosBuscados;
     }
@@ -79,8 +79,8 @@ public class ServicioBiblioteca {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
 
         recursosBuscados.addAll(repositorioLibros.obtenerTodos());
-        recursosBuscados.addAll(repositorioPeriodico.obtenerTodos());
-        recursosBuscados.addAll(repositorioComputador.obtenerTodos());
+        recursosBuscados.addAll(repositorioPeriodicos.obtenerTodos());
+        recursosBuscados.addAll(repositorioComputadores.obtenerTodos());
 
         return recursosBuscados;
     }
