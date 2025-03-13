@@ -1,11 +1,7 @@
-package biblioteca;
+package co.edu.etitc.programacion.entidades;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-/* 
- * Clase abstracta que contendrá las propiedades y métodos de uso para las clases (hijas), que la hereden.
- */
 
 public abstract class Recurso {
 
@@ -60,3 +56,4 @@ public abstract class Recurso {
     }
 
 }
+

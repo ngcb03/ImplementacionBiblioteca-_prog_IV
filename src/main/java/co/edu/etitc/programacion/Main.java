@@ -1,4 +1,4 @@
-import biblioteca.*;
+package co.edu.etitc.programacion;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,13 +6,29 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import co.edu.etitc.programacion.configuracion.ConfiguracionAplicacion;
+import co.edu.etitc.programacion.configuracion.InicioApp;
+import co.edu.etitc.programacion.entidades.Computador;
+import co.edu.etitc.programacion.entidades.Libro;
+import co.edu.etitc.programacion.entidades.Periodico;
+import co.edu.etitc.programacion.entidades.Recurso;
+import co.edu.etitc.programacion.entidades.enums.TipoComputador;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        // 1. Creamos la instancia de ServicioBiblioteca.
-        ServicioBiblioteca servicioBiblioteca = new ServicioBiblioteca();
+        // Obtenemos instancia para registrar el bean de la clase ServicioBiblioteca en el contexto de Spring
+        var contexto = new AnnotationConfigApplicationContext(ConfiguracionAplicacion.class);
 
-        // 2. Hacemos la carga de libros, periodicos y computadores en la biblioteca.
+        // Imprimir nombre de la aplicación que viene desde el archivo application.properties
+        var inicioApp = contexto.getBean("inicioApp", InicioApp.class);
+        System.out.println("\n#####################################################");
+        System.out.println("La aplicación se llama -> " + inicioApp.nombreAplicacion());
+        System.out.println("#####################################################\n");
+
+        // Colección de recursos libros, periodicos y computadores a cargar en la biblioteca.
         List<Recurso> recursosAgregar = new ArrayList<>(List.of(
             new Libro("Java Programming", LocalDateTime.of(2022, 4, 15, 10, 30), true, "James Gosling", "TechPress", Year.of(2020)),
             new Libro("Clean Code", LocalDateTime.of(2019, 3, 12, 14, 45), true, "Robert C. Martin", "Prentice Hall", Year.of(2008)),
@@ -34,19 +50,21 @@ public class Main {
             new Computador("Surface Pro", LocalDateTime.of(2023, 6, 30, 17, 50), true, "Microsoft", "9", "Windows 11", TipoComputador.TABLET)
         ));
 
+        // cargamos los recursos a la biblioteca
+        var servicioBiblioteca = contexto.getBean("servicioBiblioteca", ServicioBiblioteca.class);
         recursosAgregar.forEach(servicioBiblioteca::agregar);
 
-        // 3. Imprimimos la lista de recursos que hay actualmente en la biblioteca.
+        // imprimir la lista de recursos que hay actualmente en la biblioteca.
         System.out.println("Recursos en la biblioteca:");
         servicioBiblioteca.obtenerTodos().forEach(System.out::println);
 
-        // 4. Buscamos los recursos que coincidan con un criterio de búsqueda y los imprimimos.
+        // buscar los recursos que coincidan con un criterio de búsqueda y los imprimimos.
         String parametroBusqueda = "2022-04-15 10:30";
         System.out.println("\nBuscando recurso por criterio '" + parametroBusqueda + "' en la biblioteca:");
         List<Recurso> recursosBusqueda = new ArrayList<>(servicioBiblioteca.buscarRecursos(parametroBusqueda));
         recursosBusqueda.forEach(System.out::println);
 
-        // 5. Tomamos el primer resultado de la búsqueda y los eliminamos de la biblioteca en caso de existir.
+        // Tomar el primer resultado de la búsqueda y los eliminamos de la biblioteca en caso de existir.
         if (!recursosBusqueda.isEmpty()) {
             Recurso recursoAEliminar = recursosBusqueda.get(0);
             servicioBiblioteca.quitarRecurso(recursoAEliminar);
@@ -55,10 +73,14 @@ public class Main {
             System.out.println("\nNo se encontraron recursos con '" + parametroBusqueda + "' para eliminar.");
         }
 
-        // 6. Volvemos a imprimir la lista con los recursos actualizados.
+        // imprimir la lista con los recursos actualizados.
         System.out.println("\nRecursos en la biblioteca después de la eliminación:");
         servicioBiblioteca.obtenerTodos().forEach(System.out::println);
-        
+
+
+        // cerramos contexto de Spring para liberar recursos
+        contexto.close();
+
     }
 
 }
