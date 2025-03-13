@@ -10,24 +10,24 @@ import co.edu.etitc.programacion.entidades.Computador;
 import co.edu.etitc.programacion.entidades.Libro;
 import co.edu.etitc.programacion.entidades.Periodico;
 import co.edu.etitc.programacion.entidades.Recurso;
-import co.edu.etitc.programacion.repositorio.interfaces.Repositorio;
+import co.edu.etitc.programacion.repositorio.interfaces.RecursoRepositorio;
 
 @Component
 public class ServicioBiblioteca {
 
     // inyección de dependencias por constructor lineas 18-34
-    private final Repositorio<Libro> libroRepositorio;
-    private final Repositorio<Periodico> periodicoRepositorio;
-    private final Repositorio<Computador> computadorRepositorio;
+    private final RecursoRepositorio<Libro> libroRepositorio;
+    private final RecursoRepositorio<Periodico> periodicoRepositorio;
+    private final RecursoRepositorio<Computador> computadorRepositorio;
 
     /*
      * ejemplo práctico en código donde una clase sea inyectada 
      * como dependencia mediante el constructor.
     */
     @Autowired
-    public ServicioBiblioteca(Repositorio<Libro> libroRepositorio,
-                              Repositorio<Periodico> periodicoRepositorio,
-                              Repositorio<Computador> computadorRepositorio) {
+    public ServicioBiblioteca(RecursoRepositorio<Libro> libroRepositorio,
+                              RecursoRepositorio<Periodico> periodicoRepositorio,
+                              RecursoRepositorio<Computador> computadorRepositorio) {
         this.libroRepositorio = libroRepositorio;
         this.periodicoRepositorio = periodicoRepositorio;
         this.computadorRepositorio = computadorRepositorio;
@@ -78,9 +78,9 @@ public class ServicioBiblioteca {
     public Collection<Recurso> obtenerTodos() {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
 
-        recursosBuscados.addAll(libroRepositorio.obtener());
-        recursosBuscados.addAll(periodicoRepositorio.obtener());
-        recursosBuscados.addAll(computadorRepositorio.obtener());
+        recursosBuscados.addAll(libroRepositorio.obtenerTodos());
+        recursosBuscados.addAll(periodicoRepositorio.obtenerTodos());
+        recursosBuscados.addAll(computadorRepositorio.obtenerTodos());
 
         return recursosBuscados;
     }

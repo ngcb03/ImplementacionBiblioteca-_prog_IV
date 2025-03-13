@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import co.edu.etitc.programacion.entidades.Libro;
-import co.edu.etitc.programacion.repositorio.interfaces.Repositorio;
+import co.edu.etitc.programacion.repositorio.interfaces.RecursoRepositorio;
 
 @Component
-public class LibroRepositorio implements Repositorio<Libro> {
+public class LibroRepositorio implements RecursoRepositorio<Libro> {
 
     private List<Libro> libros;
 
@@ -27,7 +27,7 @@ public class LibroRepositorio implements Repositorio<Libro> {
     }
 
     @Override
-    public Collection<Libro> obtener() {
+    public Collection<Libro> obtenerTodos() {
         return libros;
     }
 

@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 import co.edu.etitc.programacion.entidades.Periodico;
-import co.edu.etitc.programacion.repositorio.interfaces.Repositorio;
+import co.edu.etitc.programacion.repositorio.interfaces.RecursoRepositorio;
 
 @Component
-public class PeriodicoRepositorio implements Repositorio<Periodico> {
+public class PeriodicoRepositorio implements RecursoRepositorio<Periodico> {
 
     private List<Periodico> periodicos;
 
@@ -26,7 +26,7 @@ public class PeriodicoRepositorio implements Repositorio<Periodico> {
     }
 
     @Override
-    public Collection<Periodico> obtener() {
+    public Collection<Periodico> obtenerTodos() {
         return periodicos;
     }
 
