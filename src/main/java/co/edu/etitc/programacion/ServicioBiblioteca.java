@@ -16,9 +16,9 @@ import co.edu.etitc.programacion.repositorio.interfaces.RecursoRepositorio;
 public class ServicioBiblioteca {
 
     // inyección de dependencias por constructor lineas 18-34
-    private final RecursoRepositorio<Libro> libroRepositorio;
-    private final RecursoRepositorio<Periodico> periodicoRepositorio;
-    private final RecursoRepositorio<Computador> computadorRepositorio;
+    private final RecursoRepositorio<Libro> repositorioLibros;
+    private final RecursoRepositorio<Periodico> repositorioPeriodico;
+    private final RecursoRepositorio<Computador> repositorioComputador;
 
     /*
      * ejemplo práctico en código donde una clase sea inyectada 
@@ -28,19 +28,19 @@ public class ServicioBiblioteca {
     public ServicioBiblioteca(RecursoRepositorio<Libro> libroRepositorio,
                               RecursoRepositorio<Periodico> periodicoRepositorio,
                               RecursoRepositorio<Computador> computadorRepositorio) {
-        this.libroRepositorio = libroRepositorio;
-        this.periodicoRepositorio = periodicoRepositorio;
-        this.computadorRepositorio = computadorRepositorio;
+        this.repositorioLibros = libroRepositorio;
+        this.repositorioPeriodico = periodicoRepositorio;
+        this.repositorioComputador = computadorRepositorio;
     }
 
     // agregar un recurso desde el respositorio específico
     public void agregar(Recurso recurso) {
         if (recurso instanceof Libro) {
-            libroRepositorio.agregar((Libro) recurso);
+            repositorioLibros.agregar((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            periodicoRepositorio.agregar((Periodico) recurso);
+            repositorioPeriodico.agregar((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            computadorRepositorio.agregar((Computador) recurso);
+            repositorioComputador.agregar((Computador) recurso);
         } else {
             throw new IllegalArgumentException("Tipo de recurso no soportado: " + recurso.getClass().getName());
         }
@@ -49,11 +49,11 @@ public class ServicioBiblioteca {
     // quitar un recurso desde el respositorio específico
     public void quitarRecurso(Recurso recurso) {
         if (recurso instanceof Libro) {
-            libroRepositorio.eliminar((Libro) recurso);
+            repositorioLibros.eliminar((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            periodicoRepositorio.eliminar((Periodico) recurso);
+            repositorioPeriodico.eliminar((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            computadorRepositorio.eliminar((Computador) recurso);
+            repositorioComputador.eliminar((Computador) recurso);
         } else {
             throw new IllegalArgumentException("Tipo de recurso no soportado: " + recurso.getClass().getName());
         }
@@ -66,9 +66,9 @@ public class ServicioBiblioteca {
     public Collection<Recurso> buscarRecursos(String criterio) {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
         
-        recursosBuscados.addAll(libroRepositorio.buscar(criterio));
-        recursosBuscados.addAll(periodicoRepositorio.buscar(criterio));
-        recursosBuscados.addAll(computadorRepositorio.buscar(criterio));
+        recursosBuscados.addAll(repositorioLibros.buscar(criterio));
+        recursosBuscados.addAll(repositorioPeriodico.buscar(criterio));
+        recursosBuscados.addAll(repositorioComputador.buscar(criterio));
         
         return recursosBuscados;
     }
@@ -78,9 +78,9 @@ public class ServicioBiblioteca {
     public Collection<Recurso> obtenerTodos() {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
 
-        recursosBuscados.addAll(libroRepositorio.obtenerTodos());
-        recursosBuscados.addAll(periodicoRepositorio.obtenerTodos());
-        recursosBuscados.addAll(computadorRepositorio.obtenerTodos());
+        recursosBuscados.addAll(repositorioLibros.obtenerTodos());
+        recursosBuscados.addAll(repositorioPeriodico.obtenerTodos());
+        recursosBuscados.addAll(repositorioComputador.obtenerTodos());
 
         return recursosBuscados;
     }
