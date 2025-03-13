@@ -1,6 +1,7 @@
-package biblioteca;
+package co.edu.etitc.programacion.entidades;
 
 import java.time.LocalDateTime;
+import co.edu.etitc.programacion.entidades.enums.TipoComputador;
 
 /* 
  * Heredamos de la clase abstracta 'Recurso' para obtener sus propiedades y métodos.
