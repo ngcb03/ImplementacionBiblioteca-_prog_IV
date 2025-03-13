@@ -10,7 +10,7 @@
  ## 2. Muestre un ejemplo práctico en código donde una clase sea inyectada como dependencia mediante el constructor. 
   ### R. El ejemplo práctico se puede ver en la línea 31 de clase ServicioBiblioteca, donde la inyección de dependencias se realiza mediante su constructor.
 
- ``java
+ ```java
 @Component
 public class ServicioBiblioteca {
 
@@ -27,6 +27,7 @@ public class ServicioBiblioteca {
         this.computadorRepositorio = computadorRepositorio;
     }
 }
+```
 
 # Uso de Repositorios Genéricos en Java
   ## 3. Explique el principio de inversión de control y cómo se aplica en esta solución.
