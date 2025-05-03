@@ -1,33 +1,44 @@
 package co.edu.etitc.programacion.entidades;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import co.edu.etitc.programacion.entidades.enums.TipoComputador;
 
-/* 
- * Heredamos de la clase abstracta 'Recurso' para obtener sus propiedades y métodos.
- */
 
-public class Computador extends Recurso {
+public class Computador implements Recurso {
 
     // encapsulamos las propiedades
+    private Integer id;
+    private String nombre;
+    private LocalDateTime fechaIngreso;
+    private boolean activo;
     private String marca;
     private String modelo;
     private String sistemaOperativo;
     private TipoComputador tipoComputador;
 
-    /* 
-     * Además del contructor vacío por defecto, definimos otro constructor que acepte todos las propiedades definidas en la clase.
-     */
+    // Formatear la fecha para una mejor presentación
+    final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
 
     public Computador(String nombre, LocalDateTime fechaIngreso, boolean activo, String marca, String modelo, String sistemaOperativo, TipoComputador tipoComputador) {
-        super(nombre, fechaIngreso, activo);
+        this.nombre = nombre;
+        this.fechaIngreso = fechaIngreso;
+        this.activo = activo;
         this.marca = marca;
         this.modelo = modelo;
         this.sistemaOperativo = sistemaOperativo;
         this.tipoComputador = tipoComputador;
     }
 
-    // métodos getters y setters para las propiedades encapsuladas
+    public Computador() {}
+
+    
+
+    public Integer id() {
+        return this.id;
+    }
 
     public String getMarca() {
         return marca;
@@ -45,21 +56,35 @@ public class Computador extends Recurso {
         return tipoComputador.toString();
     }
 
-
-    // se sobreescribe el metodo proveniente de la clase abstracta 'Recurso' en base a la lógica requerida para esta clase.
-    @Override
-    public boolean coincideConCriterio(String criterio) {
-        return super.coincideConCriterio(criterio) || marca.contains(criterio) || sistemaOperativo.contains(criterio) || tipoComputador.toString().toLowerCase().contains(criterio);
+    public boolean findByCriteria(String criterio) {
+        return nombre.equals(criterio) || fechaIngreso.format(formatter).toString().equals(criterio) || marca.contains(criterio) || sistemaOperativo.contains(criterio) || tipoComputador.toString().toLowerCase().contains(criterio);
     }
 
-    /* 
-     * también sobreescribimos el método 'toString' para agregar las propiedades de la clase abstracta 'Recurso' y 
-     * poder visualizarlos por consola al momento de hacer eso de este método.
-     */
+    // sobreescribimos métodos de la interfaz Recurso con lógica propia.
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public LocalDateTime getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    @Override
+    public boolean isActivo() {
+        return activo;
+    }
+
+    @Override
+    public void darDeBaja() {
+        activo = false;
+    }
 
     @Override
     public String toString() {
-        return String.format("\n [/ COMPUTADOR /] \n %s - Marca: %s\n - Modelo: %s\n - Sistema operativo: %s\n - Tipo: %s", super.toString(), marca, modelo, sistemaOperativo, this.getTipoComputador());
+        return String.format("\n [/ COMPUTADOR /] \n - Id: %s\n - Nombre: %s\n - Fecha de ingreso: %s\n - Activo: %s\n - Marca: %s\n - Modelo: %s\n - Sistema operativo: %s\n - Tipo: %s", id, nombre, fechaIngreso.format(formatter), activo, marca, modelo, sistemaOperativo, this.getTipoComputador());
     }
     
 }

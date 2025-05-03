@@ -11,7 +11,7 @@ y repositorios en estas rutas*/
 @ComponentScan(basePackages = {
     "co.edu.etitc.programacion.configuracion",
     "co.edu.etitc.programacion",
-    "co.edu.etitc.programacion.repositorio.implementaciones"
+    "co.edu.etitc.programacion.repositorio"
 }) 
 
 // cargamos las propiedades registradas en el archivo application.properties

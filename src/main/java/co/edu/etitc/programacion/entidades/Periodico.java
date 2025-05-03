@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-/* 
- * Heredamos de la clase abstracta 'Recurso' para obtener sus propiedades y métodos.
- */
-
-public class Periodico extends Recurso {
+public class Periodico implements Recurso {
 
     // encapsulamos las propiedades
+    private Integer id;
+    private String nombre;
+    private LocalDateTime fechaIngreso;
+    private boolean activo;
     private LocalDate fechaPublicacion;
     private String editorial;
 
@@ -21,12 +21,20 @@ public class Periodico extends Recurso {
 
     
     public Periodico(String nombre, LocalDateTime fechaIngreso, boolean activo, LocalDate fechaPublicacion, String editorial) {
-        super(nombre, fechaIngreso, activo);
+        this.nombre = nombre;
+        this.fechaIngreso = fechaIngreso;
+        this.activo = activo;
         this.fechaPublicacion = fechaPublicacion;
         this.editorial = editorial;
     }
 
-    // métodos getters y setters para las propiedades encapsuladas
+    public Periodico() {}
+    
+
+
+    public Integer id() {
+        return this.id;
+    }
 
     public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
@@ -36,21 +44,35 @@ public class Periodico extends Recurso {
         return editorial;
     }
 
-    // se sobreescribe el metodo proveniente de la clase abstracta 'Recurso' en base a la lógica requerida para esta clase.
-
-    @Override
-    public boolean coincideConCriterio(String criterio) {
-        return super.coincideConCriterio(criterio) || fechaPublicacion.format(formatter).toString().contains(criterio) || editorial.contains(criterio);
+    public boolean findByCriteria(String criterio) {
+        return nombre.equals(criterio) || fechaIngreso.format(formatter).toString().equals(criterio) || fechaPublicacion.format(formatter).toString().contains(criterio) || editorial.contains(criterio);
     }
 
-    /* 
-     * también sobreescribimos el método 'toString' para agregar las propiedades de la clase abstracta 'Recurso' y 
-     * poder visualizarlos por consola al momento de hacer eso de este método.
-     */
+    // sobreescribimos métodos de la interfaz Recurso con lógica propia.
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public LocalDateTime getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    @Override
+    public boolean isActivo() {
+        return activo;
+    }
+
+    @Override
+    public void darDeBaja() {
+        activo = false;
+    }
 
     @Override
     public String toString() {
-        return String.format("\n [/ PERIODICO /] \n %s - Fecha de publicación: %s\n - Editorial: %s", super.toString(), fechaPublicacion.format(formatter), editorial);
+        return String.format("\n [/ PERIODICO /] \n - Id: %s\n - Nombre: %s\n - Fecha de ingreso: %s\n - Activo: %s\n - Fecha de publicación: %s\n - Editorial: %s", id, nombre, fechaIngreso.format(formatter), activo, fechaPublicacion.format(formatter), editorial);
     }
 
 }
