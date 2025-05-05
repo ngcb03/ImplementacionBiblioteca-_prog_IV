@@ -3,13 +3,19 @@ package co.edu.etitc.programacion.entidades;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
+
 import co.edu.etitc.programacion.entidades.enums.TipoComputador;
 
-
+@Table(name = "COMPUTADOR")
 public class Computador implements Recurso {
 
     // encapsulamos las propiedades
+    @Id
     private Integer id;
+    
     private String nombre;
     private LocalDateTime fechaIngreso;
     private boolean activo;
@@ -19,6 +25,7 @@ public class Computador implements Recurso {
     private TipoComputador tipoComputador;
 
     // Formatear la fecha para una mejor presentación
+    @Transient
     final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
@@ -40,6 +47,21 @@ public class Computador implements Recurso {
         return this.id;
     }
 
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public LocalDateTime getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    @Override
+    public boolean isActivo() {
+        return activo;
+    }
+
     public String getMarca() {
         return marca;
     }
@@ -54,27 +76,6 @@ public class Computador implements Recurso {
 
     public String getTipoComputador() {
         return tipoComputador.toString();
-    }
-
-    public boolean findByCriteria(String criterio) {
-        return nombre.equals(criterio) || fechaIngreso.format(formatter).toString().equals(criterio) || marca.contains(criterio) || sistemaOperativo.contains(criterio) || tipoComputador.toString().toLowerCase().contains(criterio);
-    }
-
-    // sobreescribimos métodos de la interfaz Recurso con lógica propia.
-
-    @Override
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public LocalDateTime getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    @Override
-    public boolean isActivo() {
-        return activo;
     }
 
     @Override

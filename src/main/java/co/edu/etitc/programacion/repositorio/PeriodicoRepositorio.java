@@ -2,6 +2,7 @@ package co.edu.etitc.programacion.repositorio;
 
 import java.util.Collection;
 
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,15 @@ public interface PeriodicoRepositorio extends CrudRepository<Periodico, Integer>
 
     Periodico save(Periodico recurso);
     void delete(Periodico recurso);
+
+    @Query("""
+        SELECT * FROM periodico WHERE 
+            LOWER(nombre) LIKE LOWER(CONCAT('%', ?1, '%')) OR
+            LOWER(editorial) LIKE LOWER(CONCAT('%', ?1, '%')) OR
+            CAST(fecha_publicacion AS VARCHAR) LIKE CONCAT('%', ?1, '%')
+    """)
     Collection<Periodico> findByCriteria(String criterio);
+    
     Collection<Periodico> findAll();
     
 }

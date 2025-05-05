@@ -4,11 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
 
+@Table(name = "PERIODICO")
 public class Periodico implements Recurso {
 
-    // encapsulamos las propiedades
+    @Id
     private Integer id;
+    
     private String nombre;
     private LocalDateTime fechaIngreso;
     private boolean activo;
@@ -17,6 +22,7 @@ public class Periodico implements Recurso {
 
 
     // Formatear la fecha para una mejor presentación
+    @Transient
     final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     
@@ -36,20 +42,6 @@ public class Periodico implements Recurso {
         return this.id;
     }
 
-    public LocalDate getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public boolean findByCriteria(String criterio) {
-        return nombre.equals(criterio) || fechaIngreso.format(formatter).toString().equals(criterio) || fechaPublicacion.format(formatter).toString().contains(criterio) || editorial.contains(criterio);
-    }
-
-    // sobreescribimos métodos de la interfaz Recurso con lógica propia.
-
     @Override
     public String getNombre() {
         return nombre;
@@ -63,6 +55,14 @@ public class Periodico implements Recurso {
     @Override
     public boolean isActivo() {
         return activo;
+    }
+
+    public LocalDate getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public String getEditorial() {
+        return editorial;
     }
 
     @Override
