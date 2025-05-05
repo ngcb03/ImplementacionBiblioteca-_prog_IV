@@ -44,12 +44,12 @@ public class Main {
 
             // Colección de recursos libros, periodicos y computadores a cargar en la biblioteca.
             List<Recurso> recursosAgregar = new ArrayList<>(List.of(
-                new Libro("Java Programming", LocalDateTime.of(2022, 4, 15, 10, 30), true, "James Gosling", "TechPress", Year.of(2020)),
-                new Libro("Clean Code", LocalDateTime.of(2019, 3, 12, 14, 45), true, "Robert C. Martin", "Prentice Hall", Year.of(2008)),
-                new Libro("Effective Java", LocalDateTime.of(2020, 5, 23, 9, 15), true, "Joshua Bloch", "Addison-Wesley", Year.of(2018)),
-                new Libro("The Pragmatic Programmer", LocalDateTime.of(2021, 8, 7, 11, 0), true, "Andrew Hunt", "Addison-Wesley", Year.of(1999)),
-                new Libro("Design Patterns", LocalDateTime.of(2018, 2, 20, 16, 20), true, "Erich Gamma", "Pearson", Year.of(1994)),
-                new Libro("Head First Java", LocalDateTime.of(2023, 7, 4, 13, 50), true, "Kathy Sierra", "O'Reilly", Year.of(2005)),
+                new Libro("Java Programming", LocalDateTime.of(2022, 4, 15, 10, 30), true, "James Gosling", "TechPress", 2020),
+                new Libro("Clean Code", LocalDateTime.of(2019, 3, 12, 14, 45), true, "Robert C. Martin", "Prentice Hall", 2008),
+                new Libro("Effective Java", LocalDateTime.of(2020, 5, 23, 9, 15), true, "Joshua Bloch", "Addison-Wesley", 2018),
+                new Libro("The Pragmatic Programmer", LocalDateTime.of(2021, 8, 7, 11, 0), true, "Andrew Hunt", "Addison-Wesley", 1999),
+                new Libro("Design Patterns", LocalDateTime.of(2018, 2, 20, 16, 20), true, "Erich Gamma", "Pearson", 1994),
+                new Libro("Head First Java", LocalDateTime.of(2023, 7, 4, 13, 50), true, "Kathy Sierra", "O'Reilly", 2005),
                 new Periodico("El Colombiano", LocalDateTime.of(2024, 2, 20, 8, 0), true, LocalDate.of(2024, 2, 20), "Editorial Nacional"),
                 new Periodico("El Tiempo", LocalDateTime.of(2023, 12, 30, 7, 45), true, LocalDate.of(2024, 1, 15), "Grupo Editorial Casa"),
                 new Periodico("The New York Times", LocalDateTime.of(2024, 3, 10, 6, 30), true, LocalDate.of(2024, 3, 10), "NYT Publishing"),
@@ -74,7 +74,7 @@ public class Main {
             servicioBiblioteca.obtenerTodos().forEach(System.out::println);
 
             // buscar los recursos que coincidan con un criterio de búsqueda y los imprimimos.
-            String parametroBusqueda = "2022-04-15 10:30";
+            String parametroBusqueda = "Apple";
             System.out.println("\nBuscando recurso por criterio '" + parametroBusqueda + "' en la biblioteca:");
             List<Recurso> recursosBusqueda = new ArrayList<>(servicioBiblioteca.buscarRecursos(parametroBusqueda));
             recursosBusqueda.forEach(System.out::println);
@@ -89,8 +89,8 @@ public class Main {
             }
 
             // imprimir la lista con los recursos actualizados.
-            System.out.println("\nRecursos en la biblioteca después de la eliminación:");
-            servicioBiblioteca.obtenerTodos().forEach(System.out::println);
+            /* System.out.println("\nRecursos en la biblioteca después de la eliminación:");
+            servicioBiblioteca.obtenerTodos().forEach(System.out::println); */
 
 
             // cerramos contexto de Spring para liberar recursos

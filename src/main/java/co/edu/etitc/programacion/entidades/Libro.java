@@ -1,6 +1,5 @@
 package co.edu.etitc.programacion.entidades;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
@@ -15,19 +14,19 @@ public class Libro implements Recurso {
     @Id
     private Integer id;
 
+    private String nombre;
+    private LocalDateTime fechaIngreso;
     private boolean activo;
-    private Year anio;
     private String autor;
     private String editorial;
-    private LocalDateTime fechaIngreso;
-    private String nombre;
+    private int anio; // ¡se cambio es tipo de dato para el campo año ya que genera un error de conversion por un entero!
 
     // Formatear la fecha para una mejor presentación
     @Transient
     final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
-    public Libro(String nombre, LocalDateTime fechaIngreso, boolean activo, String autor, String editorial, Year anio) {
+    public Libro(String nombre, LocalDateTime fechaIngreso, boolean activo, String autor, String editorial, int anio) {
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
         this.activo = activo;
@@ -67,7 +66,7 @@ public class Libro implements Recurso {
         return editorial;
     }
 
-    public Year getAnio() {
+    public int getAnio() {
         return anio;
     }
 
