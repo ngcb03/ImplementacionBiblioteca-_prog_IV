@@ -1,25 +1,26 @@
 package co.edu.etitc.programacion.entidades;
 
 import java.time.LocalDateTime;
-import java.time.Year;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "LIBRO")
+@Table(name = "LIBRO") // indicamos con la anotación @Table que esta clase será mapeada junto con sus atributos como una tabla en la base de datos (h2).
 public class Libro implements Recurso {
 
+    // indicamos con la anotación @Id el atributo que será mapeado como Id en nuestra tabla
     @Id
     private Integer id;
 
+    // agregamos atributos nombres, fechaIngreso y activo antes herados de la clase Recurso (actualmente una interfáz)
     private String nombre;
     private LocalDateTime fechaIngreso;
     private boolean activo;
     private String autor;
     private String editorial;
-    private int anio; // ¡se cambio es tipo de dato para el campo año ya que genera un error de conversion por un entero!
+    private int anio; // ¡se cambia el tipo de dato para el campo año de Year a int, ya que genera un error de conversion con el tipo Year!
 
     // Formatear la fecha para una mejor presentación
     @Transient

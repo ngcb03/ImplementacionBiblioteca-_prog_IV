@@ -9,13 +9,14 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import co.edu.etitc.programacion.entidades.enums.TipoComputador;
 
-@Table(name = "COMPUTADOR")
+@Table(name = "COMPUTADOR") // indicamos con la anotación @Table que esta clase será mapeada junto con sus atributos como una tabla en la base de datos (h2).
 public class Computador implements Recurso {
 
-    // encapsulamos las propiedades
+    // indicamos con la anotación @Id el atributo que será mapeado como Id en nuestra tabla 
     @Id
     private Integer id;
     
+    // agregamos atributos nombres, fechaIngreso y activo antes herados de la clase Recurso (actualmente una interfáz)
     private String nombre;
     private LocalDateTime fechaIngreso;
     private boolean activo;

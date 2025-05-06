@@ -8,12 +8,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "PERIODICO")
+@Table(name = "PERIODICO")  // indicamos con la anotación @Table que esta clase será mapeada junto con sus atributos como una tabla en la base de datos (h2).
 public class Periodico implements Recurso {
 
+    // indicamos con la anotación @Id el atributo que será mapeado como Id en nuestra tabla
     @Id
     private Integer id;
     
+    // agregamos atributos nombres, fechaIngreso y activo antes herados de la clase Recurso (actualmente una interfáz)
     private String nombre;
     private LocalDateTime fechaIngreso;
     private boolean activo;

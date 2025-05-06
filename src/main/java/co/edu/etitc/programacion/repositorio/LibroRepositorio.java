@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.etitc.programacion.entidades.Libro;
 
-@Repository
+@Repository // Interfáz repositorio que extiende operaciones CRUD configuradas en base a clase a mapear.
 public interface LibroRepositorio extends CrudRepository<Libro, Integer> {
     
     Libro save(Libro recurso);
     void delete(Libro recurso);
     
+    // Consulta personalizada para busqueda por criterio en las columnas nombre, autor, editorial y año
     @Query("""
         SELECT * FROM libro WHERE 
             LOWER(nombre) LIKE LOWER(CONCAT('%', :criterio, '%')) OR

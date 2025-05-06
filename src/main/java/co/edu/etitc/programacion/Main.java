@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class Main {
 
         try(ConfigurableApplicationContext contexto = SpringApplication.run(Main.class, args)) {
 
-            // obtener datasource
+            // obtener DataSource
             DataSource dataSource = contexto.getBean(DataSource.class);
 
             // crear las tablas usando la conexión de la base de datos
@@ -66,7 +65,7 @@ public class Main {
 
             var servicioBiblioteca = contexto.getBean(ServicioBiblioteca.class);
 
-            // Ejemplo de uso de las operaciones de los repositorios (CRUD)
+            // Uso de las operaciones de los repositorios (CRUD)
             recursosAgregar.forEach(servicioBiblioteca::agregar);
 
             // imprimir la lista de recursos que hay actualmente en la biblioteca.
@@ -99,6 +98,7 @@ public class Main {
 
     }
 
+    // Generar tablas para la base de datos en caso de no ejecutarse el archivo schema.sql cargado desde el Bean definido en el DataSource de la configuración.
     private static void crearTablas(Connection conexion) throws SQLException {
         conexion.createStatement().execute("""
             CREATE TABLE IF NOT EXISTS COMPUTADOR (
@@ -112,7 +112,7 @@ public class Main {
                 tipo_computador VARCHAR(50)
             );
         """);
-    
+        
         conexion.createStatement().execute("""
             CREATE TABLE IF NOT EXISTS LIBRO (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -124,7 +124,7 @@ public class Main {
                 anio INT
             );
         """);
-    
+        
         conexion.createStatement().execute("""
             CREATE TABLE IF NOT EXISTS PERIODICO (
                 id INT AUTO_INCREMENT PRIMARY KEY,

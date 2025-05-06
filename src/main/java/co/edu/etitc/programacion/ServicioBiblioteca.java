@@ -17,15 +17,11 @@ import co.edu.etitc.programacion.repositorio.PeriodicoRepositorio;
 @Component
 public class ServicioBiblioteca {
 
-    // inyección de dependencias por constructor lineas 18-34
+    // inyección de dependencias por constructor
     private LibroRepositorio repositorioLibros;
     private PeriodicoRepositorio repositorioPeriodicos;
     private ComputadorRepositorio repositorioComputadores;
-
-    /*
-     * ejemplo práctico en código donde una clase sea inyectada 
-     * como dependencia mediante el constructor.
-    */
+    
     @Autowired
     public ServicioBiblioteca(LibroRepositorio libroRepositorio,
                               PeriodicoRepositorio periodicoRepositorio,

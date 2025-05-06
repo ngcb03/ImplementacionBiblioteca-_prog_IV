@@ -9,12 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.etitc.programacion.entidades.Periodico;
 
+// Interfáz repositorio que extiende operaciones CRUD configuradas en base a clase a mapear.
 @Repository
 public interface PeriodicoRepositorio extends CrudRepository<Periodico, Integer> {
 
     Periodico save(Periodico recurso);
     void delete(Periodico recurso);
 
+    // Consulta personalizada para busqueda por criterio en las columnas nombre, editorial y fecha_publicacion
     @Query("""
         SELECT * FROM periodico WHERE 
             LOWER(nombre) LIKE LOWER(CONCAT('%', :criterio, '%')) OR

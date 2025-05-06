@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.etitc.programacion.entidades.Computador;
 
-@Repository
+@Repository // Interfáz repositorio que extiende operaciones CRUD configuradas en base a clase a mapear.
 public interface ComputadorRepositorio extends CrudRepository<Computador, Integer> {
 
     Computador save(Computador recurso);
     void delete(Computador recurso);
 
+    // Consulta personalizada para busqueda por criterio en las columnas nombre, marca, modelo, sistema_operativo y tipo_computador
     @Query("""
         SELECT * FROM COMPUTADOR WHERE 
             LOWER(nombre) LIKE LOWER(CONCAT('%', :criterio, '%')) OR
