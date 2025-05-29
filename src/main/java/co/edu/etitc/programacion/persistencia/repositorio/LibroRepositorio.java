@@ -1,4 +1,4 @@
-package co.edu.etitc.programacion.repositorio;
+package co.edu.etitc.programacion.persistencia.repositorio;
 
 import java.util.Collection;
 
@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import co.edu.etitc.programacion.entidades.Libro;
+import co.edu.etitc.programacion.persistencia.entidades.Libro;
 
 @Repository // Interfáz repositorio que extiende operaciones CRUD configuradas en base a clase a mapear.
 public interface LibroRepositorio extends CrudRepository<Libro, Integer> {

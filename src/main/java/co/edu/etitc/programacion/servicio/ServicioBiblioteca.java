@@ -1,4 +1,4 @@
-package co.edu.etitc.programacion;
+package co.edu.etitc.programacion.servicio;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,21 +6,21 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import co.edu.etitc.programacion.entidades.Computador;
-import co.edu.etitc.programacion.entidades.Libro;
-import co.edu.etitc.programacion.entidades.Periodico;
-import co.edu.etitc.programacion.entidades.Recurso;
-import co.edu.etitc.programacion.repositorio.ComputadorRepositorio;
-import co.edu.etitc.programacion.repositorio.LibroRepositorio;
-import co.edu.etitc.programacion.repositorio.PeriodicoRepositorio;
+import co.edu.etitc.programacion.persistencia.entidades.Computador;
+import co.edu.etitc.programacion.persistencia.entidades.Libro;
+import co.edu.etitc.programacion.persistencia.entidades.Periodico;
+import co.edu.etitc.programacion.persistencia.entidades.Recurso;
+import co.edu.etitc.programacion.persistencia.repositorio.ComputadorRepositorio;
+import co.edu.etitc.programacion.persistencia.repositorio.LibroRepositorio;
+import co.edu.etitc.programacion.persistencia.repositorio.PeriodicoRepositorio;
 
 @Component
 public class ServicioBiblioteca {
 
     // inyección de dependencias por constructor
-    private LibroRepositorio repositorioLibros;
-    private PeriodicoRepositorio repositorioPeriodicos;
-    private ComputadorRepositorio repositorioComputadores;
+    private final LibroRepositorio repositorioLibros;
+    private final PeriodicoRepositorio repositorioPeriodicos;
+    private final ComputadorRepositorio repositorioComputadores;
     
     @Autowired
     public ServicioBiblioteca(LibroRepositorio libroRepositorio,

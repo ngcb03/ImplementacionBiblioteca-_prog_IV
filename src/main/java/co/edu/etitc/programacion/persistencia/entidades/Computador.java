@@ -1,4 +1,4 @@
-package co.edu.etitc.programacion.entidades;
+package co.edu.etitc.programacion.persistencia.entidades;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
-import co.edu.etitc.programacion.entidades.enums.TipoComputador;
+import co.edu.etitc.programacion.persistencia.entidades.enums.TipoComputador;
 
 @Table(name = "COMPUTADOR") // indicamos con la anotación @Table que esta clase será mapeada junto con sus atributos como una tabla en la base de datos (h2).
 public class Computador implements Recurso {

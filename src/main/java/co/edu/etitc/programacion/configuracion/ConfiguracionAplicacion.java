@@ -19,10 +19,12 @@ y repositorios en estas rutas*/
 @Configuration
 @ComponentScan(basePackages = {
     "co.edu.etitc.programacion.configuracion",
-    "co.edu.etitc.programacion",
-    "co.edu.etitc.programacion.repositorio"
+    "co.edu.etitc.programacion.persistencia.repositorio",
+    "co.edu.etitc.programacion.presentacion",
+    "co.edu.etitc.programacion.servicio"
+    
 }) 
-@EnableJdbcRepositories(basePackages = "co.edu.etitc.programacion.repositorio")
+@EnableJdbcRepositories(basePackages = "co.edu.etitc.programacion.persistencia.repositorio")
 
 // se cargan las propiedades registradas en el archivo application.properties
 @PropertySource("classpath:application.properties")

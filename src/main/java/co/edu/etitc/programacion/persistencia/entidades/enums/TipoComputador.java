@@ -1,4 +1,4 @@
-package co.edu.etitc.programacion.entidades.enums;
+package co.edu.etitc.programacion.persistencia.entidades.enums;
 
 public enum TipoComputador {
 

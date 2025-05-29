@@ -1,4 +1,4 @@
-package co.edu.etitc.programacion.entidades;
+package co.edu.etitc.programacion.persistencia.entidades;
 
 import java.time.LocalDateTime;
 
