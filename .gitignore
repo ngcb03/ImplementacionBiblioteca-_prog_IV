@@ -3,3 +3,7 @@
 
 # Ignorar la carpeta de compilación de Maven
 target/
+
+# archivos db
+db-ejercicio.mv.db
+db-ejercicio.trace.db

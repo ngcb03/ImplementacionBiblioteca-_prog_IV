@@ -10,24 +10,22 @@ import co.edu.etitc.programacion.entidades.Computador;
 import co.edu.etitc.programacion.entidades.Libro;
 import co.edu.etitc.programacion.entidades.Periodico;
 import co.edu.etitc.programacion.entidades.Recurso;
-import co.edu.etitc.programacion.repositorio.interfaces.RecursoRepositorio;
+import co.edu.etitc.programacion.repositorio.ComputadorRepositorio;
+import co.edu.etitc.programacion.repositorio.LibroRepositorio;
+import co.edu.etitc.programacion.repositorio.PeriodicoRepositorio;
 
 @Component
 public class ServicioBiblioteca {
 
-    // inyección de dependencias por constructor lineas 18-34
-    private final RecursoRepositorio<Libro> repositorioLibros;
-    private final RecursoRepositorio<Periodico> repositorioPeriodicos;
-    private final RecursoRepositorio<Computador> repositorioComputadores;
-
-    /*
-     * ejemplo práctico en código donde una clase sea inyectada 
-     * como dependencia mediante el constructor.
-    */
+    // inyección de dependencias por constructor
+    private LibroRepositorio repositorioLibros;
+    private PeriodicoRepositorio repositorioPeriodicos;
+    private ComputadorRepositorio repositorioComputadores;
+    
     @Autowired
-    public ServicioBiblioteca(RecursoRepositorio<Libro> libroRepositorio,
-                              RecursoRepositorio<Periodico> periodicoRepositorio,
-                              RecursoRepositorio<Computador> computadorRepositorio) {
+    public ServicioBiblioteca(LibroRepositorio libroRepositorio,
+                              PeriodicoRepositorio periodicoRepositorio,
+                              ComputadorRepositorio computadorRepositorio) {
         this.repositorioLibros = libroRepositorio;
         this.repositorioPeriodicos = periodicoRepositorio;
         this.repositorioComputadores = computadorRepositorio;
@@ -36,11 +34,11 @@ public class ServicioBiblioteca {
     // agregar un recurso desde el respositorio específico
     public void agregar(Recurso recurso) {
         if (recurso instanceof Libro) {
-            repositorioLibros.agregar((Libro) recurso);
+            repositorioLibros.save((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            repositorioPeriodicos.agregar((Periodico) recurso);
+            repositorioPeriodicos.save((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            repositorioComputadores.agregar((Computador) recurso);
+            repositorioComputadores.save((Computador) recurso);
         } else {
             throw new IllegalArgumentException("Tipo de recurso no soportado: " + recurso.getClass().getName());
         }
@@ -49,11 +47,11 @@ public class ServicioBiblioteca {
     // quitar un recurso desde el respositorio específico
     public void quitarRecurso(Recurso recurso) {
         if (recurso instanceof Libro) {
-            repositorioLibros.eliminar((Libro) recurso);
+            repositorioLibros.delete((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            repositorioPeriodicos.eliminar((Periodico) recurso);
+            repositorioPeriodicos.delete((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            repositorioComputadores.eliminar((Computador) recurso);
+            repositorioComputadores.delete((Computador) recurso);
         } else {
             throw new IllegalArgumentException("Tipo de recurso no soportado: " + recurso.getClass().getName());
         }
@@ -66,9 +64,9 @@ public class ServicioBiblioteca {
     public Collection<Recurso> buscarRecursos(String criterio) {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
         
-        recursosBuscados.addAll(repositorioLibros.buscar(criterio));
-        recursosBuscados.addAll(repositorioPeriodicos.buscar(criterio));
-        recursosBuscados.addAll(repositorioComputadores.buscar(criterio));
+        recursosBuscados.addAll(repositorioLibros.findByCriteria(criterio));
+        recursosBuscados.addAll(repositorioPeriodicos.findByCriteria(criterio));
+        recursosBuscados.addAll(repositorioComputadores.findByCriteria(criterio));
         
         return recursosBuscados;
     }
@@ -78,9 +76,9 @@ public class ServicioBiblioteca {
     public Collection<Recurso> obtenerTodos() {
         Collection<Recurso> recursosBuscados = new ArrayList<>();
 
-        recursosBuscados.addAll(repositorioLibros.obtenerTodos());
-        recursosBuscados.addAll(repositorioPeriodicos.obtenerTodos());
-        recursosBuscados.addAll(repositorioComputadores.obtenerTodos());
+        recursosBuscados.addAll(repositorioLibros.findAll());
+        recursosBuscados.addAll(repositorioPeriodicos.findAll());
+        recursosBuscados.addAll(repositorioComputadores.findAll());
 
         return recursosBuscados;
     }
