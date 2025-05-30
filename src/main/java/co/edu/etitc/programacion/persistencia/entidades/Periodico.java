@@ -40,7 +40,8 @@ public class Periodico implements Recurso {
     
 
 
-    public Integer id() {
+    @Override
+    public Integer getId() {
         return this.id;
     }
 

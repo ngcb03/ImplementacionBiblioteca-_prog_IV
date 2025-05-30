@@ -3,8 +3,13 @@ package co.edu.etitc.programacion.presentacion.controlador;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +44,16 @@ public class BibliotecaControlador {
             return servicioBiblioteca.buscarRecursos(criterio);
     }
 
+    @PostMapping(path = "/agregar")
+    public ResponseEntity<?> agregar(@RequestBody Recurso recurso) {
+        servicioBiblioteca.agregar(recurso);
+        return ResponseEntity.ok(HttpStatus.CREATED);
+    }
 
+    @DeleteMapping(path = "/quitar")
+    public ResponseEntity<?> quitar(@RequestBody Recurso recurso) {
+        servicioBiblioteca.quitarRecurso(recurso);
+        return ResponseEntity.noContent().build();
+    }
     
 }
