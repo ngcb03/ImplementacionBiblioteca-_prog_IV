@@ -1,4 +1,4 @@
-# Implementación Biblioteca - Cambios en la rama `parcialSegundoCorte`
+# Implementación Biblioteca - Cambios en la rama `trabajo final`
 
 ## Integrantes
 
@@ -6,34 +6,96 @@
 - Agudelo Mojonboy
 - Nicolas G. Camargo Buelvas
 
-## Instrucciones implementadas
-
-Esta rama contiene los cmbios solicitados para adaptar el proyecto de biblioteca usando **Spring Data JDBC**.
-
----
 
 ## Cambios hechos
 
-- Se elimina la herencia en el modelo.
-- Se crea una interfaz `Recurso` con los siguientes métodos:
-  - `getNombre()`
-  - `getFechaIngreso()`
-  - `isActivo()`
-  - `darDeBaja()`
-  - `toString()`
-- Las clases `Libro`, `Periodico` y `Computador` implementan la interfaz `Recurso`.
-  - Cada clase define:
-    - Campo `id` de tipo `Integer`
-    - Campos `nombre`, `fechaIngreso`, `activo`
-    - Constructor vacío (requerido por Spring Data JDBC)
+### Objetivo Funcional
 
-- Cada entidad tiene su propio repositorio que **extiende `CrudRepository`**.
-- Se implementa el método `findByCriteria`, el cual compara el valor dado con **todos los campos de la entidad**.
-- Se elimina el método `coincideConCriterio`.
+Permitir a los usuarios **agregar**, **visualizar** y **eliminar** cada uno de los recursos disponibles en la biblioteca:
 
-- El servicio `ServicioBiblioteca` ahora utiliza `findByCriteria` en lugar de `coincideConCriterio`.
-- La lógica del servicio se mantiene igual.
+- Periódico
+- Computador
+- Libro
+
+---
+
+### Requisitos Funcionales
+
+#### 1. Controlador REST en Spring
+
+Implementar un controlador REST (`@RestController`) que exponga todos los métodos disponibles en la clase `ServicioBiblioteca`.
+
+El controlador debe permitir:
+
+- **Agregar recursos** (`POST`)
+- **Eliminar recursos** (`DELETE`)
+- **Listar todos los recursos** (`GET`)
+
+**Requisitos técnicos:**
+
+- El tipo de contenido debe ser `application/json` tanto en peticiones como en respuestas.
+- Utilizar las anotaciones adecuadas:
+  - `@PostMapping`
+  - `@GetMapping`
+  - `@DeleteMapping`
+
+---
+
+#### 2. Frontend (HTML o SPA)
+
+Crear una página HTML simple que consuma los servicios REST utilizando `fetch` o una biblioteca similar.
+
+El archivo HTML debe servirse como contenido estático desde el mismo proyecto Java.
+
+Las páginas HTML deben estar disponibles en la siguiente ruta base:
+
+```
+/static/
+```
+
+🔗 Ejemplo de acceso:  
+`http://localhost:8080/static/index.html`
+
+La página debe permitir:
+
+- Visualizar todos los recursos actuales
+- Agregar un nuevo recurso (Libro, Periódico o Computador)
+- Eliminar un recurso existente
+
+> No se exige diseño visual. Solo se requiere que la interfaz sea funcional.
+
+---
+
+#### 3. (Opcional) SPA con React o Angular
+
+Se permite usar **React** o **Angular**, siempre que:
+
+- Se compile el proyecto.
+- El contenido estático generado se sirva desde:
+
+```
+http://localhost:8080/static/
+```
+
+---
+
+#### 4. Generación de JAR Ejecutable
+
+El proyecto debe generar un archivo **JAR ejecutable** utilizando el plugin:
+
+```xml
+<plugin>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+```
+
+Debe poder ejecutarse con el siguiente comando:
+
+```bash
+java -jar nombre-del-archivo.jar
+```
 
 ## Nueva Rama
 
-Esta implementación se encuentra en la rama: `parcialSegundoCorte`.
+Esta implementación se encuentra en la rama: `trabajoFinal`.

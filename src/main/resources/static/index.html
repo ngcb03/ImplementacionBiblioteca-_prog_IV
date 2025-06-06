@@ -1,23 +1,70 @@
-<html>
-    <head>
-        <title>Servicio biblioteca</title>
-        <meta charset="UTF-8">
-        <base href="/static/"/>
-        <script src="bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="bootstrap.min.css">
-    </head>
-    <body>
-        <h1 class="h1">Recursos biblioteca</h1>
-        <div class="container">
-            <div class="row p-3">
-                <a class="btn btn-primary" href="computadores.html">Computadores</a>
-            </div>
-            <div class="row p-3">
-                <a class="btn btn-primary" href="libros.html">Libros</a>
-            </div>
-            <div class="row p-3">
-                <a class="btn btn-primary" href="periodico.html">Periódicos</a>
-            </div>
-        </div>
-    </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <base href="/static/"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Frontend Biblioteca</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Biblioteca Virtual</h1>
+
+  <!-- SECCIÓN 1: LISTAR TODOS LOS RECURSOS -->
+  <div class="section">
+    <h2>1. Listar todos los recursos</h2>
+    <button id="btn-refrescar">Recargar lista</button>
+    <div id="lista-recursos">
+      <!-- Aquí se inyectará la tabla con todos los recursos -->
+      <p>Cargando recursos...</p>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 2: BUSCAR RECURSOS POR CRITERIO -->
+  <div class="section">
+    <h2>2. Buscar recursos por criterio</h2>
+    <label for="input-criterio">Criterio de búsqueda</label>
+    <input type="text" id="input-criterio" placeholder="Ejemplo: 'programación', 'Dell', 'José'..." />
+    <button id="btn-buscar">Buscar</button>
+    <div id="resultado-busqueda">
+      <!-- Aquí se mostrará la tabla con los resultados de la búsqueda -->
+    </div>
+  </div>
+
+  <!-- SECCIÓN 3: AGREGAR UN NUEVO RECURSO -->
+  <div class="section">
+    <h2>3. Agregar un nuevo recurso</h2>
+    <form id="form-agregar">
+      <label for="select-tipo">Tipo de recurso</label>
+      <select id="select-tipo" required>
+        <option value="" disabled selected>— Selecciona un tipo —</option>
+        <option value="LIBRO">Libro</option>
+        <option value="PERIODICO">Periódico</option>
+        <option value="COMPUTADOR">Computador</option>
+      </select>
+
+      <!-- Campos comunes a todos los recursos -->
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" required />
+
+      <label for="fecha_ingreso">Fecha de ingreso</label>
+      <input type="datetime-local" id="fecha_ingreso" required />
+
+      <label for="activo_select">Activo</label>
+      <select id="activo_select" required>
+        <option value="" disabled selected>— Selecciona —</option>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+
+      <!-- Contenedor para campos específicos según tipo -->
+      <div id="campos-especificos"></div>
+
+      <button type="submit">Agregar recurso</button>
+    </form>
+    <div id="mensaje-agregar" class="mensaje"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>

@@ -18,6 +18,7 @@ import co.edu.etitc.programacion.servicio.ServicioBiblioteca;
 
 @RestController
 @RequestMapping("/api/biblioteca")
+/* @CrossOrigin(origins = "*") */
 public class BibliotecaControlador {
 
     private final ServicioBiblioteca servicioBiblioteca;
