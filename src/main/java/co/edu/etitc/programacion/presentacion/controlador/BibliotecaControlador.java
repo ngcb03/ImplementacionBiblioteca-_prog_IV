@@ -28,16 +28,13 @@ public class BibliotecaControlador {
         this.servicioBiblioteca = servicioBiblioteca;
     }
 
-    @GetMapping(
-        path = "/todos", 
-        produces = "application/json"
-        )
+    @GetMapping(produces = "application/json")
     public Collection<Recurso> obtenerRecursos() {
         return servicioBiblioteca.obtenerTodos();
     }
 
     @GetMapping(
-        path = "/buscar-por-criterio/{criterio}", 
+        path = "/{criterio}", 
         produces = "application/json"
         )
     public Collection<Recurso> buscarRercurso(
@@ -45,13 +42,13 @@ public class BibliotecaControlador {
             return servicioBiblioteca.buscarRecursos(criterio);
     }
 
-    @PostMapping(path = "/agregar")
+    @PostMapping
     public ResponseEntity<?> agregar(@RequestBody Recurso recurso) {
         servicioBiblioteca.agregar(recurso);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path = "/quitar")
+    @DeleteMapping
     public ResponseEntity<?> quitar(@RequestBody Recurso recurso) {
         servicioBiblioteca.quitarRecurso(recurso);
         return ResponseEntity.noContent().build();

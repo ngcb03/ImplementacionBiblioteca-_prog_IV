@@ -71,7 +71,7 @@ function limpiarNodo(id) {
 async function obtenerTodosRecursos() {
     const contenedor = limpiarNodo("lista-recursos");
     try {
-      const resp = await fetch(`${API_BASE}/todos`);
+      const resp = await fetch(`${API_BASE}`);
       if (!resp.ok) {
         throw new Error(`Error ${resp.status}`);
       }
@@ -166,7 +166,7 @@ async function buscarRecursos() {
     return;
   }
   try {
-    const resp = await fetch(`${API_BASE}/buscar-por-criterio/${encodeURIComponent(criterio)}`);
+    const resp = await fetch(`${API_BASE}/${encodeURIComponent(criterio)}`);
     if (!resp.ok) {
       throw new Error(`Error ${resp.status}`);
     }
@@ -332,7 +332,7 @@ async function agregarRecurso(event) {
     }
   
     try {
-      const resp = await fetch(`${API_BASE}/agregar`, {
+      const resp = await fetch(`${API_BASE}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(recurso)
@@ -353,7 +353,7 @@ async function agregarRecurso(event) {
 async function eliminarRecurso(id, tipo) {
   if (!confirm(`¿Seguro que deseas eliminar el recurso con ID ${id} (tipo: ${tipo})?`)) return;
   try {
-    const resp = await fetch(`${API_BASE}/quitar`, {
+    const resp = await fetch(`${API_BASE}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, tipo })
