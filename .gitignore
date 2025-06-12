@@ -5,5 +5,5 @@
 target/
 
 # archivos db
-# db-ejercicio.mv.db
-# db-ejercicio.trace.db
+db-ejercicio.mv.db
+db-ejercicio.trace.db

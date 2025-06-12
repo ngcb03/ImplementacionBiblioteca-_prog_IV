@@ -7,10 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.etitc.programacion.persistencia.entidades.Recurso;
@@ -28,18 +28,17 @@ public class BibliotecaControlador {
         this.servicioBiblioteca = servicioBiblioteca;
     }
 
+    // URIs RESTful: uso de la mims URI para un diseño más limpio
+    // GET /recursos: sin parámetro, retorna todos
+    // GET /recursos?criterio=valor: con parámetro, filtra por criterio
     @GetMapping(produces = "application/json")
-    public Collection<Recurso> obtenerRecursos() {
-        return servicioBiblioteca.obtenerTodos();
-    }
-
-    @GetMapping(
-        path = "/{criterio}", 
-        produces = "application/json"
-        )
-    public Collection<Recurso> buscarRercurso(
-        @PathVariable("criterio") String criterio) {
+    public Collection<Recurso> obtenerOFiltrarRecursos(
+        @RequestParam(name = "criterio", required = false) String criterio
+    ) {
+        if (criterio != null && !criterio.isBlank()) {
             return servicioBiblioteca.buscarRecursos(criterio);
+        }
+        return servicioBiblioteca.obtenerTodos();
     }
 
     @PostMapping
